@@ -1,0 +1,50 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Minecraft Client",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/run/client",
+      "console": "internalConsole",
+      "stopOnEntry": false,
+      "mainClass": "net.fabricmc.devlaunchinjector.Main",
+      "vmArgs": "-Dfabric.dli.config\u003dP:\\Minecraft@@0020Mods\\ZeeMods\\modding-template\\.gradle\\loom-cache\\launch.cfg -Dfabric.dli.env\u003dclient -Dfabric.dli.main\u003dnet.minecraftforge.userdev.LaunchTesting",
+      "args": "",
+      "env": {
+        "MOD_CLASSES": "main_b42fe0c%%P:\\Minecraft Mods\\ZeeMods\\modding-template\\build\\resources\\main;main_b42fe0c%%P:\\Minecraft Mods\\ZeeMods\\modding-template\\build\\classes\\java\\main"
+      },
+      "projectName": ""
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Data",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/run",
+      "console": "internalConsole",
+      "stopOnEntry": false,
+      "mainClass": "net.fabricmc.devlaunchinjector.Main",
+      "vmArgs": "-Dfabric.dli.config\u003dP:\\Minecraft@@0020Mods\\ZeeMods\\modding-template\\.gradle\\loom-cache\\launch.cfg -Dfabric.dli.env\u003ddata -Dfabric.dli.main\u003dnet.minecraftforge.userdev.LaunchTesting",
+      "args": "",
+      "env": {
+        "MOD_CLASSES": "main_7ae8974%%P:\\Minecraft Mods\\ZeeMods\\modding-template\\build\\resources\\main;main_7ae8974%%P:\\Minecraft Mods\\ZeeMods\\modding-template\\build\\classes\\java\\main"
+      },
+      "projectName": ""
+    },
+    {
+      "type": "java",
+      "name": "Minecraft Server",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/run/server",
+      "console": "internalConsole",
+      "stopOnEntry": false,
+      "mainClass": "net.fabricmc.devlaunchinjector.Main",
+      "vmArgs": "-Dfabric.dli.config\u003dP:\\Minecraft@@0020Mods\\ZeeMods\\modding-template\\.gradle\\loom-cache\\launch.cfg -Dfabric.dli.env\u003dserver -Dfabric.dli.main\u003dnet.minecraftforge.userdev.LaunchTesting",
+      "args": "nogui",
+      "env": {
+        "MOD_CLASSES": "main_1953a92%%P:\\Minecraft Mods\\ZeeMods\\modding-template\\build\\resources\\main;main_1953a92%%P:\\Minecraft Mods\\ZeeMods\\modding-template\\build\\classes\\java\\main"
+      },
+      "projectName": ""
+    }
+  ]
+}

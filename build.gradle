@@ -1,0 +1,142 @@
+plugins {
+    id 'dev.architectury.loom' version '0.7.2-SNAPSHOT'
+    id 'io.github.juuxel.loom-quiltflower' version '1.1.0'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+archivesBaseName = project.mod_id
+version = "${project.minecraft_version}-${project.mod_version}"
+group = 'com.syszee'
+
+loom {
+    silentMojangMappingsLicense()
+
+    mixinConfigs = [(String) "${project.mod_id}.mixins.json"]
+
+    dataGen {
+        mod project.mod_id
+    }
+
+    runs {
+        client {
+            runDir "run/client"
+        }
+        server {
+            runDir "run/server"
+        }
+    }
+
+    launches {
+        data {
+            arg "--existing", file("src/main/resources").absolutePath
+        }
+    }
+}
+
+configurations {
+    shade
+}
+
+repositories {
+    maven {
+        url "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = "JitPack"
+        url = "https://jitpack.io"
+    }
+}
+
+dependencies {
+    // to change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+
+    // choose what mappings you want to use here
+    // leave this uncommented if you want to use mojang's official mappings
+    mappings minecraft.officialMojangMappings()
+
+    // uncomment this if you want to use yarn mappings
+    // mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+
+    // uncomment this if you want to use mcp mappings
+    // mappings "de.oceanlabs.mcp:mcp_${project.mcp_channel}:${project.mcp_mappings}"
+
+    // your forge dependency, this is **required** when using Forge Loom in forge mode!
+    forge "net.minecraftforge:forge:${project.minecraft_version}-${project.forge_version}"
+
+    // These mods make life easier during runtime. They aren't strictly necessary
+
+	// Uncomment if adding dimensions
+    // modRuntime "curse.maven:shutupexperimentalsettings-407174:3188120" 
+    modRuntime "curse.maven:configured-457570:3340535"
+    modRuntime "curse.maven:catalogue-459701:3335979"
+
+    modImplementation "com.github.Ocelot5836:Sonar:${project.sonar_version}"
+    shade "com.github.Ocelot5836:Sonar:${project.sonar_version}"
+}
+
+processResources {
+	inputs.property("mod_name", project.mod_name)
+    inputs.property("mod_version", project.mod_version)
+    inputs.property("mod_id", project.mod_id)
+    inputs.property("mod_author", project.mod_author)
+    filesMatching(["META-INF/mods.toml", "pack.mcmeta", (String) "${project.mod_id}.mixins.json"]) {
+        expand 'mod_version': project.mod_version, 'mod_id': project.mod_id, 'mod_name': project.mod_name, 'mod_author': project.mod_author
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shade]
+    relocate 'io.github.ocelot', "com.syszee.${project.mod_id}.lib.ocelot"
+    classifier "shadow"
+}
+
+remapJar {
+    dependsOn(shadowJar)
+    input.set(shadowJar.archivePath)
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title"     : project.mod_name,
+            "Specification-Vendor"    : "SystemZee",
+            "Specification-Version"   : "1",
+            "Implementation-Title"    : project.name,
+            "Implementation-Version"  : version,
+            "Implementation-Vendor"   :"SystemZee",
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "MixinConfigs"            : "${project.mod_id}.mixins.json"
+        ])
+    }
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}" }
+    }
+
+    // add some additional metadata to the jar manifest
+    manifest {
+        attributes([
+                "Specification-Title"     : project.mod_name,
+                "Specification-Vendor"    : "SystemZee",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : version,
+                "Implementation-Vendor"   : "SystemZee",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shade]
+    relocate 'io.github.ocelot', "com.syszee.${project.mod_id}.lib.ocelot"
+}
