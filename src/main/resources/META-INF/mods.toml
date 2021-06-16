@@ -1,13 +1,17 @@
 modLoader = "javafml"
 loaderVersion = "[36,)"
-license = "All Rights Reserved"
+issueTrackerURL="https://github.com/Ocelot5836/Flinting/issues"
+license = "MIT"
 
 [[mods]]
 modId = "${mod_id}"
 version = "${mod_version}"
 displayName = "${mod_name}"
 authors = "${mod_author}"
-description = "Example Description"
+description = "Forces the player to make flint tools before wood"
+
+[modproperties.${mod_id}]
+catalogueItemIcon="flinting:flint_axe"
 
 [[dependencies.${mod_id}]]
 modId = "forge"

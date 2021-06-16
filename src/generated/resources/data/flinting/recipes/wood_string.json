@@ -1,0 +1,11 @@
+{
+  "type": "flinting:flint_strip",
+  "ingredients": [
+    {
+      "tag": "forge:rods/wooden"
+    }
+  ],
+  "result": {
+    "item": "flinting:wood_string"
+  }
+}

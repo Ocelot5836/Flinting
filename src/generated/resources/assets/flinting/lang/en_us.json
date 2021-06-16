@@ -1,0 +1,9 @@
+{
+  "item.flinting.flint_axe": "Flint Hatchet",
+  "item.flinting.flint_hoe": "Flint Hoe",
+  "item.flinting.flint_pickaxe": "Flint Pickaxe",
+  "item.flinting.flint_shovel": "Flint Shovel",
+  "item.flinting.flint_sword": "Flint Sword",
+  "item.flinting.wood_string": "Wood String",
+  "itemGroup.flinting": "Flinting"
+}

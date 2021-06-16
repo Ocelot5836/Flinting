@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "F",
+    "W",
+    "S"
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "W": {
+      "item": "flinting:wood_string"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "result": {
+    "item": "flinting:flint_shovel"
+  }
+}

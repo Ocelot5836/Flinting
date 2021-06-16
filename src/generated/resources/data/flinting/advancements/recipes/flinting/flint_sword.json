@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "flinting:flint_sword"
+    ]
+  },
+  "criteria": {
+    "has_wood_string": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "flinting:wood_string"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "flinting:flint_sword"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wood_string",
+      "has_the_recipe"
+    ]
+  ]
+}
