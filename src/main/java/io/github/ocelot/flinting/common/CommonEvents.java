@@ -16,16 +16,16 @@ import net.minecraftforge.fml.common.Mod;
 public class CommonEvents
 {
     @SubscribeEvent
-    public static void onEvent(PlayerEvent.HarvestCheck event)
+    public static void onEvent(PlayerEvent.BreakSpeed event)
     {
         Player player = event.getPlayer();
-        BlockState state = event.getTargetBlock();
+        BlockState state = event.getState();
         ItemStack stack = player.getMainHandItem();
         ToolType tool = state.getHarvestTool();
 
-        if (event.canHarvest() && event.getTargetBlock().is(ModRegistry.REQUIRES_FLINT) && tool != null && stack.getHarvestLevel(tool, player, state) < 0)
+        if (state.is(ModRegistry.REQUIRES_FLINT) && tool != null && (stack.isEmpty() || stack.getHarvestLevel(tool, player, state) < 0))
         {
-            event.setCanHarvest(false);
+            event.setCanceled(true);
         }
     }
 }
