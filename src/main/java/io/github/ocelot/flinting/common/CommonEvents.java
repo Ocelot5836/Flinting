@@ -1,7 +1,6 @@
 package io.github.ocelot.flinting.common;
 
 import io.github.ocelot.flinting.ModMain;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,7 +23,7 @@ public class CommonEvents
         ItemStack stack = player.getMainHandItem();
         ToolType tool = state.getHarvestTool();
 
-        if (event.canHarvest() && event.getTargetBlock().is(BlockTags.LOGS) && tool != null && stack.getHarvestLevel(tool, player, state) < 0)
+        if (event.canHarvest() && event.getTargetBlock().is(ModRegistry.REQUIRES_FLINT) && tool != null && stack.getHarvestLevel(tool, player, state) < 0)
         {
             event.setCanHarvest(false);
         }

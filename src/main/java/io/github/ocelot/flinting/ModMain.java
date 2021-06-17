@@ -1,6 +1,7 @@
 package io.github.ocelot.flinting;
 
 import io.github.ocelot.flinting.common.ModRegistry;
+import io.github.ocelot.flinting.datagen.BlockTagGen;
 import io.github.ocelot.flinting.datagen.ItemModelGen;
 import io.github.ocelot.flinting.datagen.LanguageGen;
 import io.github.ocelot.flinting.datagen.RecipeGen;
@@ -8,6 +9,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
@@ -41,8 +43,10 @@ public class ModMain
     private void dataSetup(GatherDataEvent event)
     {
         DataGenerator dataGenerator = event.getGenerator();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         if (event.includeServer())
         {
+            dataGenerator.addProvider(new BlockTagGen(dataGenerator, existingFileHelper));
             dataGenerator.addProvider(new RecipeGen(dataGenerator));
         }
         if (event.includeClient())

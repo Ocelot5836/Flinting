@@ -2,9 +2,15 @@ package io.github.ocelot.flinting.common;
 
 import io.github.ocelot.flinting.ModMain;
 import io.github.ocelot.flinting.common.recipe.FlintStripRecipe;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -56,6 +62,8 @@ public class ModRegistry
             return Ingredient.of(Items.FLINT);
         }
     };
+
+    public static final Tag.Named<Block> REQUIRES_FLINT = BlockTags.createOptional(new ResourceLocation(ModMain.MOD_ID, "requires_tool"));
 
     public static final RegistryObject<Item> FLINT_SWORD = ITEMS.register("flint_sword", () -> new SwordItem(FLINT, 3, -2.4F, new Item.Properties().tab(ModMain.TAB)));
     public static final RegistryObject<Item> FLINT_SHOVEL = ITEMS.register("flint_shovel", () -> new ShovelItem(FLINT, 1.5F, -3.0F, new Item.Properties().tab(ModMain.TAB)));
