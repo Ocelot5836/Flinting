@@ -18,14 +18,18 @@ public class CommonEvents
     @SubscribeEvent
     public static void onEvent(PlayerEvent.BreakSpeed event)
     {
-        Player player = event.getPlayer();
         BlockState state = event.getState();
+        if (!state.is(ModRegistry.REQUIRES_FLINT))
+            return;
+
+        Player player = event.getPlayer();
         ItemStack stack = player.getMainHandItem();
         ToolType tool = state.getHarvestTool();
 
-        if (state.is(ModRegistry.REQUIRES_FLINT) && tool != null && (stack.isEmpty() || stack.getHarvestLevel(tool, player, state) < 0))
-        {
+        if (tool != null && (stack.isEmpty() || stack.getHarvestLevel(tool, player, state) < 0))
             event.setCanceled(true);
-        }
+
+        if (stack.getDestroySpeed(state) <= 1.0F)
+            event.setCanceled(true);
     }
 }

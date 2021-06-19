@@ -35,7 +35,7 @@ public class ModRegistry
         @Override
         public float getSpeed()
         {
-            return 1.0F;
+            return 1.5F;
         }
 
         @Override
